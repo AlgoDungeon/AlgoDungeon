@@ -30,7 +30,6 @@
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-router-dom": "^5.2.0",
-    "rot-js": "^2.1.5",
     "socket.io": "^3.0.4"
   },
   "devDependencies": {
