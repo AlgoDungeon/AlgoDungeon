@@ -1,6 +1,9 @@
+/* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 import Player from '../../components/Player.jsx';
 import Map from '../map/index.js';
+
+import { tiles } from '../../maps/map-1.js';
 
 function World(props) {
   return (
@@ -12,7 +15,7 @@ function World(props) {
         margin: '20px auto',
       }}
     >
-      <Map />
+      <Map tiles={tiles} />
       <Player />
     </div>
   );

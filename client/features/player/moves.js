@@ -21,7 +21,7 @@ export default function handleMovement(player) {
     }
   }
 
-  // tracks sprite movement to keep within map boundary
+  // tracks sprite movement to prevent from walking off map
   function mapBoundaries(prevPosition, newPosition) {
     return newPosition[0] >= 0 &&
       newPosition[0] <= MAP_WIDTH - SPRITE_SIZE &&
