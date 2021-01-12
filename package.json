@@ -34,10 +34,6 @@
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-redux": "^7.2.2",
-<<<<<<< HEAD
-=======
-    "redis": "^3.0.2",
->>>>>>> main
     "react-router-dom": "^5.2.0",
     "redis": "^3.0.2",
     "redux": "^4.0.5",
