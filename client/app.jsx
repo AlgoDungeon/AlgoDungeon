@@ -1,8 +1,7 @@
 /* eslint-disable no-useless-constructor */
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
-import Player from './components/Player.jsx';
-import Map from './features/map/index.js';
+import World from './features/world/index.js';
 
 class App extends Component {
   constructor(props) {
@@ -12,8 +11,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Map />
-        <Player />
+        <World />
       </div>
     );
   }
