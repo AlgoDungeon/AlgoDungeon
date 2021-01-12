@@ -20,12 +20,15 @@
   "homepage": "https://github.com/chelseaharris137/AlgoDungeon#readme",
   "dependencies": {
     "axios": "^0.21.1",
+    "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "mongoose": "^5.11.11",
     "node-sass": "^5.0.0",
     "path": "^0.12.7",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
+    "redis": "^3.0.2",
     "socket.io": "^3.0.4"
   },
   "devDependencies": {
@@ -35,7 +38,7 @@
     "babel-loader": "^8.2.2",
     "css-loader": "^5.0.1",
     "html-webpack-plugin": "^4.5.0",
-    "nodemon": "^2.0.6",
+    "nodemon": "^2.0.7",
     "sass": "^1.30.0",
     "sass-loader": "^10.1.0",
     "style-loader": "^2.0.0",
