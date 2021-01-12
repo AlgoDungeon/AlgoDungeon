@@ -1,7 +1,7 @@
-const algoController = {}
+const algoController = {};
 
 algoController.checkAnswers = (req, res, next) => {
-    next()
-}
+  return next();
+};
 
-module.exports = algoController
+module.exports = algoController;
