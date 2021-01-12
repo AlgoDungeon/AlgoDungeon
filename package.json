@@ -29,7 +29,9 @@
     "path": "^0.12.7",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
+    "react-redux": "^7.2.2",
     "react-router-dom": "^5.2.0",
+    "redux": "^4.0.5",
     "socket.io": "^3.0.4"
   },
   "devDependencies": {

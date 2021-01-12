@@ -1,7 +1,8 @@
 /* eslint-disable no-useless-constructor */
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
-import Map from './components/Map.jsx';
+import Player from './components/Player.jsx';
+import Map from './features/map/index.js';
 
 class App extends Component {
   constructor(props) {
@@ -12,6 +13,7 @@ class App extends Component {
     return (
       <div>
         <Map />
+        <Player />
       </div>
     );
   }
