@@ -1,7 +1,18 @@
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 
-function createSpriteTile(type) {}
+function createSpriteTile(type) {
+  switch (type) {
+    case 0:
+      return 'grass';
+
+    case 5:
+      return 'tree';
+
+    case 6:
+      return 'treasure-chest';
+  }
+}
 
 function MapTile(props) {
   return <div>{props.tile}</div>;
