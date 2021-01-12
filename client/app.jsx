@@ -2,10 +2,10 @@
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
-import Player from "./components/Player.jsx";
-import Map from "./features/map/index.js";
 import LoginPage from "./components/Login.jsx";
 import SignupPage from "./components/SignUp.jsx";
+import React, { Component } from "react";
+import World from "./features/world/index.js";
 
 class App extends Component {
   constructor(props) {
@@ -23,8 +23,7 @@ class App extends Component {
             <SignupPage />
           </Route>
           <Route exact path="/home">
-            <Map />
-            <Player />
+            <World />
           </Route>
         </Switch>
       </div>

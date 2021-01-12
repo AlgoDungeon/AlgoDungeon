@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { ChakraProvider } from '@chakra-ui/react';
 import { Provider } from 'react-redux';
 import store from './config/store.js';
-import App from './App.jsx';
+import App from './app.jsx';
 
 render(
   <BrowserRouter>
