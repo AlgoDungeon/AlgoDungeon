@@ -19,16 +19,22 @@
   },
   "homepage": "https://github.com/chelseaharris137/AlgoDungeon#readme",
   "dependencies": {
+    "@chakra-ui/react": "^1.1.4",
+    "@emotion/react": "^11.1.4",
+    "@emotion/styled": "^11.0.0",
     "axios": "^0.21.1",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "mongoose": "^5.11.11",
+    "framer-motion": "^3.2.1",
     "node-sass": "^5.0.0",
     "path": "^0.12.7",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "redis": "^3.0.2",
+    "react-router-dom": "^5.2.0",
+    "rot-js": "^2.1.5",
     "socket.io": "^3.0.4"
   },
   "devDependencies": {
