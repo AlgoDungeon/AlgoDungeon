@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
 const mongoose = require("mongoose");
-
+const apiRouter = require('./routes/api')
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 app.use(bodyParser.json());
@@ -33,6 +33,10 @@ const client = redis.createClient({
   port: 10330,
   password: "5wxv6Fd3aXrNtA4lLg8rtV4E5QsHxuK5", // default user password
 });
+
+// api 
+app.use('/api', apiRouter)
+
 
 client.set("foo", "bar", (err, reply) => {
   if (err) throw err;
