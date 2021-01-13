@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import '../styles/LoginPage.scss';
 import Logo from '../images/AlgoDungeonLogo.png';
-
 class LoginPage extends Component {
   constructor(props) {
     super(props);
@@ -13,7 +12,6 @@ class LoginPage extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-
   handleChange(event) {
     //updates state based on form input values
     this.setState({ [event.target.name]: event.target.value });
@@ -24,28 +22,23 @@ class LoginPage extends Component {
     // let path = `teachers/${teacherTopic}/${teacherName}`;
     // // this is the part !!!
     // this.props.history.push(path);
-
     event.preventDefault();
-    const loginForm = {
-      username: email,
-      password: password,
-    };
-
-    let history = useHistory();
-
+    this.setState({
+      Username: email,
+      Password: password,
+    });
+    // let history = useHistory();
     // props.submitEmail(loginForm.email);
     // props.submitPassword(loginForm.password);
-
-    axios.post('/api/user/login', loginForm).then((res) => {
-      console.log(res.data);
-      if (res.data === true) {
-        history.push('/home');
-      } else {
-        //alert please enter a valid email and username
-      }
-    });
+    // axios.post("/api/user/login", loginForm).then((res) => {
+    //   console.log(res.data);
+    //   if (res.data === true) {
+    //     history.push("/home");
+    //   } else {
+    //     //alert please enter a valid email and username
+    //   }
+    // });
   }
-
   render() {
     return (
       <div id="loginform">
@@ -57,11 +50,23 @@ class LoginPage extends Component {
             </center>
             <br></br>
             <label>Username:&nbsp;</label>
-            <input onChange={this.handleChange} required />
+            <input
+              type="text"
+              name="Username"
+              value={this.state.Username}
+              onChange={this.handleChange}
+              required
+            />
             <br></br>
             <br></br>
             <label>Password:&nbsp;&nbsp;</label>
-            <input onChange={this.handleChange} required />
+            <input
+              type="text"
+              name="Password"
+              value={this.state.Password}
+              onChange={this.handleChange}
+              required
+            />
             <br></br> <br></br>
             <center>
               <button id="loginbutton" name="submit" type="submit">
@@ -94,5 +99,4 @@ class LoginPage extends Component {
     );
   }
 }
-
 export default LoginPage;

@@ -1,6 +1,7 @@
 import { createStore, combineReducers } from 'redux';
 import playerReducer from '../features/player/reducer.js';
 import mapsReducer from '../features/map/reducer.js';
+import enemyReducer from '../features/enemy/reducer.js';
 
 // saves the state to local storage in browser
 function saveToLocalStorage(state) {
@@ -27,6 +28,7 @@ function loadFromLocalStorage() {
 const rootReducer = combineReducers({
   player: playerReducer,
   map: mapsReducer,
+  enemy: enemyReducer,
 });
 
 // stores retrieved state from local storage
