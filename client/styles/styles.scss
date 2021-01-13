@@ -1,4 +1,3 @@
-
 .row {
   margin-bottom: 0px;
   padding: 0;
@@ -7,7 +6,9 @@
 }
 
 .tile {
-  display: inline-flex;
+  //display: inline-flex;
+  display: inline-grid;
+  row-gap: 0;
   margin: 0;
   padding: 0;
 }

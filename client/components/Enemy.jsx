@@ -1,10 +1,10 @@
 import React from 'react';
-import sprite from '../../CharacterSprites/$monja.png';
+import sprite from '../../CharacterSprites/$monja_dark.png';
 import { SPRITE_SIZE } from '../config/constants.js';
 import { connect } from 'react-redux';
-import handleMovement from '../features/player/moves.js';
+import handleMovement from '../features/enemy/moves.js';
 
-function Player(props) {
+function Enemy(props) {
   return (
     <div
       style={{
@@ -12,7 +12,7 @@ function Player(props) {
         top: props.position[1],
         left: props.position[0],
         backgroundImage: `url('${sprite}')`,
-        backgroundPosition: props.spriteLocation,
+        backgroundPosition: '0 0',
         width: `${SPRITE_SIZE}px`,
         height: `${SPRITE_SIZE}px`,
       }}
@@ -21,7 +21,7 @@ function Player(props) {
 }
 
 function mapStateToProps(state) {
-  return { ...state.player };
+  return { ...state.enemy };
 }
 
-export default connect(mapStateToProps)(handleMovement(Player));
+export default connect(mapStateToProps)(handleMovement(Enemy));
