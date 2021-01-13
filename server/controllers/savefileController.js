@@ -17,6 +17,7 @@ savefileController.loadFile = async (req, res, next) => {
 /**
  * startSession - create and save a new Session into the database.
  */
+// need to implement functionality to automatically delete the latest save
 savefileController.saveFile = async (req, res, next) => {
   try {
     const files = await File.find({ username: req.body.username });
