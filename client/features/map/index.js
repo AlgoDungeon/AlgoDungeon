@@ -42,7 +42,7 @@ function Map(props) {
       style={{
         width: '640px',
         height: '320px',
-        margin: '10px auto',
+        // margin: '10px auto',
       }}
     >
       {props.tiles.map((row) => (

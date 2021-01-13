@@ -1,11 +1,12 @@
 .row {
   margin: 0;
   padding: 0;
-  background-color: green;
 }
 
 .tile {
-  display: inline-flex;
+  //display: inline-flex;
+  display: inline-grid;
+  row-gap: 0;
   margin: 0;
   padding: 0;
 }

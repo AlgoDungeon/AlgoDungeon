@@ -1,11 +1,10 @@
 /* eslint-disable no-useless-constructor */
 /* eslint-disable react/prefer-stateless-function */
-import React, { Component } from "react";
-import { Route, Switch } from "react-router-dom";
-import LoginPage from "./components/Login.jsx";
-import SignupPage from "./components/SignUp.jsx";
-import React, { Component } from "react";
-import World from "./features/world/index.js";
+import React, { Component } from 'react';
+import { Route, Switch } from 'react-router-dom';
+import LoginPage from './components/Login.jsx';
+import SignupPage from './components/SignUp.jsx';
+import World from './features/world/index.js';
 
 class App extends Component {
   constructor(props) {
@@ -20,11 +19,10 @@ class App extends Component {
             <LoginPage />
           </Route>
           <Route exact path="/signup">
-            <SignupPage />
-          </Route>
-          <Route exact path="/home">
+            {/* <SignupPage /> */}
             <World />
           </Route>
+          <Route exact path="/home"></Route>
         </Switch>
       </div>
     );
