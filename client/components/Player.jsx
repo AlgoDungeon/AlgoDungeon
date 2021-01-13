@@ -12,8 +12,13 @@ function Player(props) {
         left: props.position[0],
         backgroundImage: `url('${walkSprite}')`,
         backgroundPosition: '0 0',
+<<<<<<< HEAD
+        width: '40px',
+        height: '40px',
+=======
         width: '32px',
         height: '32px',
+>>>>>>> 8fcdd361b9513cf0b599822943f7000c1997979d
       }}
     />
   );
