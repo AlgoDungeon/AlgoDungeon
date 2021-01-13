@@ -15,20 +15,24 @@ cookieController.setCookie = (req, res, next) => {
 /**
  * setSSIDCookie - store the user id in a cookie
  */
-cookieController.setSSIDCookie = async (req, res, next) => {
-  await bcrypt.genSalt(SALT_WORK_FACTOR, async function (err, salt) {
+cookieController.setSSIDCookie = (req, res, next) => {
+  console.log(
+    `entering cookie controller res.locals.userID is ${res.locals.userID}`
+  );
+  bcrypt.genSalt(SALT_WORK_FACTOR, function (err, salt) {
     if (err) return next(err);
 
-    await bcrypt.hash(res.locals.userID, salt, async function (hashErr, hash) {
+    bcrypt.hash(res.locals.userID, salt, function (hashErr, hash) {
       if (err) return next(hashErr);
 
-      res.locals.ssid = await hash;
+      res.locals.ssid = hash;
+      console.log(res.locals.ssid);
     });
   });
 
   //console.log(req.body);
   res.cookie('algodungeonssid', res.locals.ssid, { httpOnly: true });
-  console.log('leaving cookie controller', res.locals);
+  console.log('leaving cookie controller, res.locals.ssid is', res.locals.ssid);
   return next();
 };
 
