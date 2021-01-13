@@ -2,7 +2,6 @@ const cookieController = {};
 const bcrypt = require('bcrypt');
 
 const SALT_WORK_FACTOR = 5;
-
 /**
  * setCookie - set a cookie with a random number
  */
@@ -15,24 +14,21 @@ cookieController.setCookie = (req, res, next) => {
 /**
  * setSSIDCookie - store the user id in a cookie
  */
-cookieController.setSSIDCookie = (req, res, next) => {
+cookieController.setSSIDCookie = async (req, res, next) => {
   console.log(
-    `entering cookie controller res.locals.userID is ${res.locals.userID}`
+    `entering cookie controller, res.locals includes ${String(
+      res.locals.userID
+    )}`
   );
-  bcrypt.genSalt(SALT_WORK_FACTOR, function (err, salt) {
-    if (err) return next(err);
 
-    bcrypt.hash(res.locals.userID, salt, function (hashErr, hash) {
-      if (err) return next(hashErr);
+  try {
+    const salt = await bcrypt.genSalt(SALT_WORK_FACTOR);
+    res.locals.ssid = await bcrypt.hash(String(res.locals.userID), salt);
+  } catch (error) {
+    next(error);
+  }
 
-      res.locals.ssid = hash;
-      console.log(res.locals.ssid);
-    });
-  });
-
-  //console.log(req.body);
-  res.cookie('algodungeonssid', res.locals.ssid, { httpOnly: true });
-  console.log('leaving cookie controller, res.locals.ssid is', res.locals.ssid);
+  await res.cookie('algodungeonssid', res.locals.ssid, { httpOnly: true });
   return next();
 };
 

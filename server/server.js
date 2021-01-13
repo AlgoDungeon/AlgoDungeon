@@ -45,11 +45,11 @@ app.use('/algo', algoRouter);
 
 client.set('foo', 'bar', (err, reply) => {
   if (err) throw err;
-  console.log(reply);
+  // console.log(reply);
 
   client.get('foo', (err, reply) => {
     if (err) throw err;
-    console.log(reply);
+    // console.log(reply);
   });
 });
 

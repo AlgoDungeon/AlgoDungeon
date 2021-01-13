@@ -30,36 +30,32 @@ userController.signup = (req, res, next) => {
 };
 
 userController.login = (req, res, next) => {
-  console.log('verifying user');
+  // console.log('verifying user');
   const plainTextPass = req.body.password;
 
   User.findOne({ username: req.body.username }, (err, user) => {
-    console.log(`user ${user['_id']}`);
+    // console.log(`user ${user['_id']}`);
     if (err) {
       // send back to login
       return next(err);
     }
 
-    if (user === null) return res.json(false);
+    if (!user) return res.json(false);
 
-    bcrypt.compare(
-      plainTextPass,
-      user.password /*['_doc']['password']*/,
-      (err, result) => {
-        if (err) {
-          return next(err);
-        }
-
-        if (result) {
-          const userID = user['_id'];
-          res.locals.userID = userID;
-          // console.log('leaving verify, res.locals includes', res.locals);
-          return next();
-        } else {
-          return res.json(false);
-        }
+    // bcryp compare will return a boolean, which we have labeled result
+    bcrypt.compare(plainTextPass, user.password, (err, result) => {
+      if (err) {
+        return next(err);
       }
-    );
+      if (result) {
+        const userID = user['_id'];
+        res.locals.userID = userID;
+        // console.log('leaving verify, res.locals includes', res.locals);
+        return next();
+      } else {
+        return res.json(false);
+      }
+    });
   });
 };
 
