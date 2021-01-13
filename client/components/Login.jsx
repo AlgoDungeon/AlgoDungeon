@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import "../styles/LoginPage.scss";
 import Logo from "../images/AlgoDungeonLogo.png";
-
 class LoginPage extends Component {
   constructor(props) {
     super(props);
@@ -13,7 +12,6 @@ class LoginPage extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-
   handleChange(event) {
     //updates state based on form input values
     this.setState({ [event.target.name]: event.target.value });
@@ -24,18 +22,14 @@ class LoginPage extends Component {
     // let path = `teachers/${teacherTopic}/${teacherName}`;
     // // this is the part !!!
     // this.props.history.push(path);
-
     event.preventDefault();
     this.setState({
       Username: email,
       Password: password,
     });
-
     // let history = useHistory();
-
     // props.submitEmail(loginForm.email);
     // props.submitPassword(loginForm.password);
-
     // axios.post("/api/user/login", loginForm).then((res) => {
     //   console.log(res.data);
     //   if (res.data === true) {
@@ -45,7 +39,6 @@ class LoginPage extends Component {
     //   }
     // });
   }
-
   render() {
     return (
       <div id="loginform">
@@ -106,5 +99,4 @@ class LoginPage extends Component {
     );
   }
 }
-
 export default LoginPage;
