@@ -7,8 +7,8 @@ class LoginPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
-      password: "",
+      Username: "",
+      Password: "",
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -26,24 +26,24 @@ class LoginPage extends Component {
     // this.props.history.push(path);
 
     event.preventDefault();
-    const loginForm = {
-      username: email,
-      password: password,
-    };
+    this.setState({
+      Username: email,
+      Password: password,
+    });
 
-    let history = useHistory();
+    // let history = useHistory();
 
     // props.submitEmail(loginForm.email);
     // props.submitPassword(loginForm.password);
 
-    axios.post("/api/user/login", loginForm).then((res) => {
-      console.log(res.data);
-      if (res.data === true) {
-        history.push("/home");
-      } else {
-        //alert please enter a valid email and username
-      }
-    });
+    // axios.post("/api/user/login", loginForm).then((res) => {
+    //   console.log(res.data);
+    //   if (res.data === true) {
+    //     history.push("/home");
+    //   } else {
+    //     //alert please enter a valid email and username
+    //   }
+    // });
   }
 
   render() {
@@ -57,11 +57,23 @@ class LoginPage extends Component {
             </center>
             <br></br>
             <label>Username:&nbsp;</label>
-            <input onChange={this.handleChange} required />
+            <input
+              type="text"
+              name="Username"
+              value={this.state.Username}
+              onChange={this.handleChange}
+              required
+            />
             <br></br>
             <br></br>
             <label>Password:&nbsp;&nbsp;</label>
-            <input onChange={this.handleChange} required />
+            <input
+              type="text"
+              name="Password"
+              value={this.state.Password}
+              onChange={this.handleChange}
+              required
+            />
             <br></br> <br></br>
             <center>
               <button id="loginbutton" name="submit" type="submit">

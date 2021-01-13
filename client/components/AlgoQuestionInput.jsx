@@ -12,6 +12,8 @@ class AlgoQuestionInput extends Component {
     this.state = {
       value: "",
     };
+    this.handleChange = this.handleChange.bind(this);
+    // this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleChange(editor, data, value) {
     onChange(value);
@@ -19,6 +21,7 @@ class AlgoQuestionInput extends Component {
   render() {
     return (
       <div id="dynamicproblem">
+        hello world
         <div id="question">This is where the problem will go...</div>
         <div id="solution">
           <ControlledEditor
@@ -28,8 +31,10 @@ class AlgoQuestionInput extends Component {
               mode: "javascript",
               theme: "material",
               lineNumbers: true,
+              // pollInterval: 2000,
+              // readOnly: false,
             }}
-            onBeforeChange={(editor, data, value) => {
+            onChange={(editor, data, value) => {
               this.setState({ value });
             }}
           />
