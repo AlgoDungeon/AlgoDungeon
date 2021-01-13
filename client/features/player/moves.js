@@ -74,9 +74,9 @@ export default function handleMovement(player) {
     }
   }
 
-  // listens for keydown event
+ // listens for keydown event
   window.addEventListener('keydown', (e) => {
-    e.preventDefault();
+    //e.preventDefault();
     handleKeyDown(e);
   });
   return player;

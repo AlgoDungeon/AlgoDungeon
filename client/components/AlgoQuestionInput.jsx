@@ -4,7 +4,7 @@ import "codemirror/lib/codemirror.css";
 import "codemirror/theme/material.css";
 import "codemirror/mode/javascript/javascript";
 import "codemirror/mode/css/css";
-import { Controlled as ControlledEditor } from "react-codemirror2";
+import {UnControlled as CodeMirror} from 'react-codemirror2';
 
 class AlgoQuestionInput extends Component {
   constructor(props) {
@@ -21,7 +21,7 @@ class AlgoQuestionInput extends Component {
       <div id="dynamicproblem">
         <div id="question">This is where the problem will go...</div>
         <div id="solution">
-          <ControlledEditor
+          <CodeMirror
             id="code-mirror-wrapper"
             value={this.state.value}
             options={{
@@ -29,7 +29,7 @@ class AlgoQuestionInput extends Component {
               theme: "material",
               lineNumbers: true,
             }}
-            onBeforeChange={(editor, data, value) => {
+            onChange={(editor, data, value) => {
               this.setState({ value });
             }}
           />
