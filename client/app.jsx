@@ -4,7 +4,6 @@ import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
 import LoginPage from "./components/Login.jsx";
 import SignupPage from "./components/SignUp.jsx";
-import React, { Component } from "react";
 import World from "./features/world/index.js";
 
 class App extends Component {
