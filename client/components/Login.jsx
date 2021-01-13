@@ -1,13 +1,13 @@
-import React, { Component } from "react";
-import { NavLink, useHistory } from "react-router-dom";
-import "../styles/LoginPage.scss";
-import Logo from "../images/AlgoDungeonLogo.png";
+import React, { Component } from 'react';
+import { NavLink, useHistory } from 'react-router-dom';
+import '../styles/LoginPage.scss';
+import Logo from '../images/AlgoDungeonLogo.png';
 class LoginPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      Username: "",
-      Password: "",
+      username: '',
+      password: '',
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);

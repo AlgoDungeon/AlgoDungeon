@@ -25,6 +25,7 @@ class App extends Component {
             <World />
             <AlgoQuestionInput />
           </Route>
+          <Route exact path="/home"></Route>
         </Switch>
       </div>
     );
