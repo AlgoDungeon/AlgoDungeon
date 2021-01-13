@@ -31,6 +31,8 @@ export default function handleMovement(player) {
       : prevPosition;
   }
 
+  function avoidObjects(prevPosition, newPosition) {}
+
   // dispatches new position payload
   function moveDirection(direction) {
     const prevPosition = store.getState().player.position;
