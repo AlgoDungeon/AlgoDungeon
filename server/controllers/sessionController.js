@@ -51,20 +51,16 @@ sessionController.startSession = async (req, res, next) => {
   });
 };
 
-sessionController.endSession = (req, res, next) => {
-  const cookieID = req.cookies;
-  console.log(cookieID);
-  Session.findByIdAndDelete(
-    req.cookies.algodungeonssid,
-    (err, activeSession) => {
-      if (err) {
-        err.message = { Error: 'Error in sessionController.endSession' };
-        return next(err);
-      }
+sessionController.endSession = async (req, res, next) => {
+  if (!req.cookies || !req.cookies.algodungeonssid) return next();
 
-      return next();
-    }
-  );
+  try {
+    await Session.findOneAndDelete({ cookieId: req.cookies.algodungeonssid });
+    return next();
+  } catch (err) {
+    console.error(err.message);
+    return next(err);
+  }
 };
 
 module.exports = sessionController;

@@ -29,8 +29,13 @@ router.post(
 );
 
 // api/user/logout
-router.get('/logout', sessionController.endSession, (req, res) => {
-  return res.status(200).json(true);
-});
+router.get(
+  '/logout',
+  sessionController.endSession,
+  cookieController.deleteSSIDCookie,
+  (req, res) => {
+    return res.status(200).json(true);
+  }
+);
 
 module.exports = router;
