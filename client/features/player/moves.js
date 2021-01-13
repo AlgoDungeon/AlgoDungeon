@@ -21,6 +21,29 @@ export default function handleMovement(player) {
     }
   }
 
+  // changes orientation of sprite based on direction
+  function getSpriteLocation(direction, imageIndex) {
+    switch (direction) {
+      case 'DOWN':
+        return `${SPRITE_SIZE * imageIndex}px ${SPRITE_SIZE * 0}px`;
+
+      case 'UP':
+        return `${SPRITE_SIZE * imageIndex}px ${SPRITE_SIZE * 1}px`;
+
+      case 'RIGHT':
+        return `${SPRITE_SIZE * imageIndex}px ${SPRITE_SIZE * 2}px`;
+
+      case 'LEFT':
+        return `${SPRITE_SIZE * imageIndex}px ${SPRITE_SIZE * 3}px`;
+    }
+  }
+
+  // tracks the index of each sprite within sprite image
+  function getImageIndex() {
+    const imageIndex = store.getState().player.imageIndex;
+    return imageIndex >= 3 ? 0 : imageIndex + 1;
+  }
+
   // tracks sprite movement to prevent from walking off map
   //if !== 0 then obstacle
   function mapBoundaries(prevPosition, newPosition) {
@@ -32,6 +55,7 @@ export default function handleMovement(player) {
     );
   }
 
+  // prevents sprite from walking through solid objects on map
   function avoidObjects(prevPosition, newPosition) {
     const tiles = store.getState().map.tiles;
     const y = newPosition[1] / SPRITE_SIZE;
@@ -41,15 +65,20 @@ export default function handleMovement(player) {
   }
 
   // dispatches new position payload
-  function moveDirection(direction) {
+  function moveDirection(newPosition, direction) {
+    const imageIndex = getImageIndex();
     store.dispatch({
       type: "MOVE_PLAYER",
       payload: {
-        position: direction,
+        position: newPosition,
+        direction,
+        imageIndex,
+        spriteLocation: getSpriteLocation(direction, imageIndex),
       },
     });
   }
 
+  // combines functionality to keep sprite inside map and prevent from walking through solid objects
   function tryDirection(direction) {
     const prevPosition = store.getState().player.position;
     const newPosition = getNewPosition(direction);
@@ -57,7 +86,11 @@ export default function handleMovement(player) {
       mapBoundaries(prevPosition, newPosition) &&
       avoidObjects(prevPosition, newPosition)
     ) {
+<<<<<<< HEAD
       moveDirection(newPosition);
+=======
+      moveDirection(newPosition, direction);
+>>>>>>> b2eec0ca1e4615a6b0da94efde491ea3fd97e33a
     }
   }
 
@@ -79,7 +112,11 @@ export default function handleMovement(player) {
   }
 
   // listens for keydown event
+<<<<<<< HEAD
   window.addEventListener("keydown", (e) => {
+=======
+  window.addEventListener('keydown', (e) => {
+>>>>>>> b2eec0ca1e4615a6b0da94efde491ea3fd97e33a
     //e.preventDefault();
     handleKeyDown(e);
   });
