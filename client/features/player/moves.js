@@ -24,16 +24,16 @@ export default function handleMovement(player) {
   // changes orientation of sprite based on direction
   function getSpriteLocation(direction, imageIndex) {
     switch (direction) {
-      case 'DOWN':
+      case "DOWN":
         return `${SPRITE_SIZE * imageIndex}px ${SPRITE_SIZE * 0}px`;
 
-      case 'UP':
+      case "UP":
         return `${SPRITE_SIZE * imageIndex}px ${SPRITE_SIZE * 1}px`;
 
-      case 'RIGHT':
+      case "RIGHT":
         return `${SPRITE_SIZE * imageIndex}px ${SPRITE_SIZE * 2}px`;
 
-      case 'LEFT':
+      case "LEFT":
         return `${SPRITE_SIZE * imageIndex}px ${SPRITE_SIZE * 3}px`;
     }
   }
@@ -86,11 +86,7 @@ export default function handleMovement(player) {
       mapBoundaries(prevPosition, newPosition) &&
       avoidObjects(prevPosition, newPosition)
     ) {
-<<<<<<< HEAD
-      moveDirection(newPosition);
-=======
       moveDirection(newPosition, direction);
->>>>>>> b2eec0ca1e4615a6b0da94efde491ea3fd97e33a
     }
   }
 
@@ -112,11 +108,7 @@ export default function handleMovement(player) {
   }
 
   // listens for keydown event
-<<<<<<< HEAD
   window.addEventListener("keydown", (e) => {
-=======
-  window.addEventListener('keydown', (e) => {
->>>>>>> b2eec0ca1e4615a6b0da94efde491ea3fd97e33a
     //e.preventDefault();
     handleKeyDown(e);
   });
