@@ -15,13 +15,13 @@ class App extends Component {
     return (
       <div>
         <Switch>
-          <Route exact path="/login">
+          <Route exact path="/">
             <LoginPage />
           </Route>
           <Route path="/signup">
             <SignupPage />
           </Route>
-          <Route path="/">
+          <Route path="/game">
             <World />
           </Route>
         </Switch>
