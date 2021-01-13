@@ -20,6 +20,7 @@ router.post(
 router.post(
   '/login',
   userController.login,
+  cookieController.checkCookies,
   cookieController.setSSIDCookie,
   sessionController.startSession,
   (req, res) => {
@@ -27,12 +28,9 @@ router.post(
   }
 );
 
-// api/user/
-router.get('/', (req, res) => {});
-
 // api/user/logout
-router.get('/logout', userController.login, (req, res) => {
-  return res.status(200);
+router.get('/logout', sessionController.endSession, (req, res) => {
+  return res.status(200).json(true);
 });
 
 module.exports = router;

@@ -26,34 +26,32 @@ sessionController.isLoggedIn = (req, res, next) => {
 /**
  * startSession - create and save a new Session into the database.
  */
-sessionController.startSession = (req, res, next) => {
+sessionController.startSession = async (req, res, next) => {
   //write code here
-  const ssid = res.locals.ssid;
+  const ssid = String(res.locals.ssid);
+
   // used to detect previous active session
-  Session.findOne({ cookieSSID: ssid }, (err, activeSession) => {
+  await Session.findOne({ cookieId: ssid }, async (err, activeSession) => {
     if (err) {
       err.message = { Error: 'Error in sessionController.startSession' };
+      return next(err);
     }
-    // console.log('active session found in start session');
-    if (activeSession) next();
-    else {
-      Session.create({ cookieSSID: ssid }, (err, newSession) => {
-        if (err) {
-          err.message = {
-            Error: 'Error in sessionController.startSession',
-            err,
-          };
-          return next(err);
-        }
-        console.log('starting session with ssid', ssid);
+
+    if (activeSession) {
+      next();
+    } else {
+      try {
+        await Session.create({ cookieId: ssid });
         return next();
-      });
+      } catch (err) {
+        console.error(err.message);
+        return next(err);
+      }
     }
   });
 };
 
 sessionController.endSession = (req, res, next) => {
-  //write code here
   const cookieID = req.cookies;
   console.log(cookieID);
   Session.findByIdAndDelete(

@@ -9,11 +9,12 @@ const mongoose = require('mongoose');
 const userRouter = require('./routes/userRouter');
 const savefileRouter = require('./routes/savefileRouter');
 const algoRouter = require('./routes/algoRouter');
+const cookieParser = require('cookie-parser');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 app.use(bodyParser.json());
-
+app.use(cookieParser());
 // const server = http.createServer(app);
 // const uuid = require('node-uuid'); //used for creating games.
 const redis = require('redis');
