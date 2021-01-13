@@ -1,5 +1,8 @@
+/* eslint-disable default-case */
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
+import { SPRITE_SIZE } from '../../config/constants.js';
+import styles from '../../styles/styles.scss';
 
 function createSpriteTile(type) {
   switch (type) {
@@ -10,12 +13,17 @@ function createSpriteTile(type) {
       return 'tree';
 
     case 6:
-      return 'treasure-chest';
+      return 'rock';
   }
 }
 
 function MapTile(props) {
-  return <div>{props.tile}</div>;
+  return (
+    <div
+      className={`tile ${createSpriteTile(props.tile)}`}
+      style={{ height: SPRITE_SIZE, width: SPRITE_SIZE }}
+    />
+  );
 }
 
 function MapRow(props) {
