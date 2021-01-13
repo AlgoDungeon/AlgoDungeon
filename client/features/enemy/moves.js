@@ -2,10 +2,10 @@
 import store from '../../config/store.js';
 import { SPRITE_SIZE, MAP_WIDTH, MAP_HEIGHT } from '../../config/constants.js';
 
-export default function handleMovement(player) {
+export default function handleMovement(enemy) {
   // calculates new position of sprite based on direction of movement
   function getNewPosition(direction) {
-    const prevPosition = store.getState().player.position;
+    const prevPosition = store.getState().enemy.position;
     switch (direction) {
       case 'LEFT':
         return [prevPosition[0] - SPRITE_SIZE, prevPosition[1]];
@@ -41,7 +41,7 @@ export default function handleMovement(player) {
   // dispatches new position payload
   function moveDirection(direction) {
     store.dispatch({
-      type: 'MOVE_PLAYER',
+      type: 'MOVE_ENEMY',
       payload: {
         position: direction,
       },
@@ -49,7 +49,7 @@ export default function handleMovement(player) {
   }
 
   function tryDirection(direction) {
-    const prevPosition = store.getState().player.position;
+    const prevPosition = store.getState().enemy.position;
     const newPosition = getNewPosition(direction);
     if (mapBoundaries(prevPosition, newPosition) && avoidObjects(prevPosition, newPosition)) {
       moveDirection(newPosition)
@@ -74,10 +74,10 @@ export default function handleMovement(player) {
     }
   }
 
- // listens for keydown event
+  // listens for keydown event
   window.addEventListener('keydown', (e) => {
     //e.preventDefault();
     handleKeyDown(e);
   });
-  return player;
+  return enemy;
 }
