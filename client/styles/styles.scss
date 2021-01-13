@@ -1,6 +1,8 @@
 .row {
-  margin: 0;
+  margin-bottom: 0px;
   padding: 0;
+
+  // background-color: green;
 }
 
 .tile {
@@ -15,9 +17,9 @@
   background-color: green;
 }
 
-// .rock {
-//   background-image: url('');
-// }
+.rock {
+  background-image: url('../images/brick_brown1.png');
+}
 
 // .tree {
 //   background-image: url('');

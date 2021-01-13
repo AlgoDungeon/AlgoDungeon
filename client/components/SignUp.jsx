@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import "../styles/SignUp.scss";
-import Logo from "../images/AlgoDungeonLogo.png";
+import React, { Component } from 'react';
+import '../styles/SignUp.scss';
+import Logo from '../images/AlgoDungeonLogo.png';
 
 class SignupPage extends Component {
   constructor(props) {
@@ -20,14 +20,14 @@ class SignupPage extends Component {
             <label>
               E-mail:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </label>
-            <input onChange={this.handleChange} />
+            <input onChange={this.handleChange} required />
             <br></br>
             <br></br>
             <label>Username:&nbsp;&nbsp;</label>
-            <input onChange={this.handleChange} />
+            <input onChange={this.handleChange} required />
             <br></br> <br></br>
             <label>Password:&nbsp;&nbsp;&nbsp;</label>
-            <input onChange={this.handleChange} />
+            <input onChange={this.handleChange} required />
             <br></br> <br></br>
             <center>
               <button id="loginbutton" name="submit" type="submit">

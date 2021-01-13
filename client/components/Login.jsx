@@ -1,14 +1,14 @@
-import React, { Component } from "react";
-import { NavLink, useHistory } from "react-router-dom";
-import "../styles/LoginPage.scss";
-import Logo from "../images/AlgoDungeonLogo.png";
+import React, { Component } from 'react';
+import { NavLink, useHistory } from 'react-router-dom';
+import '../styles/LoginPage.scss';
+import Logo from '../images/AlgoDungeonLogo.png';
 
 class LoginPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
-      password: "",
+      username: '',
+      password: '',
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -36,10 +36,10 @@ class LoginPage extends Component {
     // props.submitEmail(loginForm.email);
     // props.submitPassword(loginForm.password);
 
-    axios.post("/api/user/login", loginForm).then((res) => {
+    axios.post('/api/user/login', loginForm).then((res) => {
       console.log(res.data);
       if (res.data === true) {
-        history.push("/home");
+        history.push('/home');
       } else {
         //alert please enter a valid email and username
       }
@@ -57,11 +57,11 @@ class LoginPage extends Component {
             </center>
             <br></br>
             <label>Username:&nbsp;</label>
-            <input onChange={this.handleChange} />
+            <input onChange={this.handleChange} required />
             <br></br>
             <br></br>
             <label>Password:&nbsp;&nbsp;</label>
-            <input onChange={this.handleChange} />
+            <input onChange={this.handleChange} required />
             <br></br> <br></br>
             <center>
               <button id="loginbutton" name="submit" type="submit">
@@ -75,6 +75,14 @@ class LoginPage extends Component {
                 <NavLink to="/signup">
                   <strong>
                     <u>Sign up</u>
+                  </strong>
+                </NavLink>
+              </p>
+              <p>
+                Game Now !!&nbsp;
+                <NavLink to="/game">
+                  <strong>
+                    <u>!!!! </u>
                   </strong>
                 </NavLink>
               </p>

@@ -1,5 +1,11 @@
+import { SPRITE_SIZE } from '../../config/constants.js';
+
 const initialState = {
-  position: [0, 0],
+  position: [SPRITE_SIZE, SPRITE_SIZE],
+  // position: [0, 0],
+  spriteLocation: '0px, 0px',
+  direction: 'right',
+  imageIndex: 0,
 };
 
 const playerReducer = (state = initialState, action) => {

@@ -7,7 +7,6 @@ const cors = require('cors');
 const app = express();
 const mongoose = require('mongoose');
 const userRouter = require('./routes/userRouter');
-const sessionRouter = require('./routes/sessionRouter');
 const savefileRouter = require('./routes/savefileRouter');
 const algoRouter = require('./routes/algoRouter');
 
@@ -41,7 +40,6 @@ const client = redis.createClient({
 
 // api to serve all DB requests through MongoDB
 app.use('/user', userRouter);
-app.use('/session', sessionRouter);
 app.use('/savefiles', savefileRouter);
 app.use('/algo', algoRouter);
 

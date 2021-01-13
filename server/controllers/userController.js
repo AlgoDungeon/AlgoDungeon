@@ -1,4 +1,5 @@
 const User = require('../models/AlgoUserModel');
+const bcrypt = require('bcrypt');
 
 const userController = {};
 
@@ -13,9 +14,10 @@ userController.signup = (req, res, next) => {
 
   User.create(newUser, (err, user) => {
     console.log('user is', user);
+    if (user === undefined) return res.json(false);
     if (err) {
       // send back to login page
-      return next({
+      next({
         log: 'Error in userController.createUser User.create',
         message: { Error: 'Error in User.create' },
       });
@@ -37,11 +39,11 @@ userController.login = (req, res, next) => {
       return next(err);
     }
 
-    if (user === null) return res.redirect('/login');
+    if (user === null) return res.json(false);
 
     bcrypt.compare(plainTextPass, user['_doc']['password'], (err, result) => {
       if (err) {
-        return res.redirect('/login');
+        return next(err);
       }
 
       if (result) {
@@ -50,7 +52,7 @@ userController.login = (req, res, next) => {
         // console.log('leaving verify, res.locals includes', res.locals);
         return next();
       } else {
-        return res.redirect('/login');
+        return res.json(false);
       }
     });
   });

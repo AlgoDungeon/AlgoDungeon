@@ -8,9 +8,9 @@ const sessionController = {};
  */
 sessionController.isLoggedIn = (req, res, next) => {
   // write code here
-  const id = res.locals.userID || req.cookies.algodungeonid;
+  const ssid = res.locals.ssid || req.cookies.algodungeonssid;
   // console.log('looking for session with id', id);
-  Session.findOne({ cookieId: id }, (err, activeSession) => {
+  Session.findOne({ cookieSSID: ssid }, (err, activeSession) => {
     if (err) {
       err.message = { Error: 'Error within sessionController.isLoggedIn' };
       next(err);
@@ -19,7 +19,7 @@ sessionController.isLoggedIn = (req, res, next) => {
 
     if (activeSession !== null) return next();
 
-    return res.redirect('/signup');
+    return res.json(false);
   });
 };
 
@@ -28,15 +28,16 @@ sessionController.isLoggedIn = (req, res, next) => {
  */
 sessionController.startSession = (req, res, next) => {
   //write code here
-  const ID = res.locals.userID;
-  Session.findOne({ cookieId: ID }, (err, activeSession) => {
+  const ssid = res.locals.ssid;
+  // used to detect previous active session
+  Session.findOne({ cookieSSID: ssid }, (err, activeSession) => {
     if (err) {
       err.message = { Error: 'Error in sessionController.startSession' };
     }
     // console.log('active session found in start session');
     if (activeSession) next();
     else {
-      Session.create({ cookieId: ID }, (err, newSession) => {
+      Session.create({ cookieSSID: ssid }, (err, newSession) => {
         if (err) {
           err.message = {
             Error: 'Error in sessionController.startSession',
@@ -44,7 +45,7 @@ sessionController.startSession = (req, res, next) => {
           };
           return next(err);
         }
-        console.log('starting session with id', ID);
+        console.log('starting session with ssid', ssid);
         return next();
       });
     }
@@ -55,14 +56,17 @@ sessionController.endSession = (req, res, next) => {
   //write code here
   const cookieID = req.cookies;
   console.log(cookieID);
-  Session.findByIdAndDelete(req.cookies.algodungeonid, (err, activeSession) => {
-    if (err) {
-      err.message = { Error: 'Error in sessionController.endSession' };
-      return next(err);
-    }
+  Session.findByIdAndDelete(
+    req.cookies.algodungeonssid,
+    (err, activeSession) => {
+      if (err) {
+        err.message = { Error: 'Error in sessionController.endSession' };
+        return next(err);
+      }
 
-    return next();
-  });
+      return next();
+    }
+  );
 };
 
 module.exports = sessionController;

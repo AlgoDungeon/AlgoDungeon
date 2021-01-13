@@ -1,6 +1,7 @@
 /* eslint-disable default-case */
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
+import { connect } from 'react-redux';
 import { SPRITE_SIZE } from '../../config/constants.js';
 import styles from '../../styles/styles.scss';
 
@@ -28,7 +29,7 @@ function MapTile(props) {
 
 function MapRow(props) {
   return (
-    <div className="row">
+    <div className="row" style={{ height: SPRITE_SIZE }}>
       {props.tiles.map((tile) => (
         <MapTile tile={tile} />
       ))}
@@ -40,9 +41,9 @@ function Map(props) {
   return (
     <div
       style={{
-        width: '640px',
-        height: '320px',
-        // margin: '10px auto',
+        width: `${SPRITE_SIZE * 28}`,
+        height: `${SPRITE_SIZE * 18}`,
+        margin: '100px auto',
       }}
     >
       {props.tiles.map((row) => (
@@ -52,4 +53,10 @@ function Map(props) {
   );
 }
 
-export default Map;
+function mapStateToProps(state) {
+  return {
+    tiles: state.map.tiles,
+  };
+}
+
+export default connect(mapStateToProps)(Map);
