@@ -10,18 +10,18 @@ class App extends Component {
   constructor(props) {
     super(props);
   }
-
+//temporarily moved / route to send us to the game - Miguel
   render() {
     return (
       <div>
         <Switch>
-          <Route exact path="/">
+          <Route exact path="/login">
             <LoginPage />
           </Route>
           <Route path="/signup">
             <SignupPage />
           </Route>
-          <Route path="/home">
+          <Route path="/">
             <World />
           </Route>
         </Switch>
