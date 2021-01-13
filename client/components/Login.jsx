@@ -77,6 +77,12 @@ class LoginPage extends Component {
                     <u>Sign up</u>
                   </strong>
                 </NavLink>
+                <br></br>
+                <NavLink to="/home">
+                  <strong>
+                    <u>game</u>
+                  </strong>
+                </NavLink>
               </p>
             </center>
           </form>
