@@ -57,11 +57,11 @@ class LoginPage extends Component {
             </center>
             <br></br>
             <label>Username:&nbsp;</label>
-            <input onChange={this.handleChange} />
+            <input onChange={this.handleChange} required />
             <br></br>
             <br></br>
             <label>Password:&nbsp;&nbsp;</label>
-            <input onChange={this.handleChange} />
+            <input onChange={this.handleChange} required />
             <br></br> <br></br>
             <center>
               <button id="loginbutton" name="submit" type="submit">
@@ -77,10 +77,12 @@ class LoginPage extends Component {
                     <u>Sign up</u>
                   </strong>
                 </NavLink>
-                <br></br>
-                <NavLink to="/home">
+              </p>
+              <p>
+                Game Now !!&nbsp;
+                <NavLink to="/game">
                   <strong>
-                    <u>game</u>
+                    <u>!!!! </u>
                   </strong>
                 </NavLink>
               </p>

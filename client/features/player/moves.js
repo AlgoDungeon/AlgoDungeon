@@ -22,40 +22,55 @@ export default function handleMovement(player) {
   }
 
   // tracks sprite movement to prevent from walking off map
+  //if !== 0 then obstacle
   function mapBoundaries(prevPosition, newPosition) {
     return newPosition[0] >= 0 &&
       newPosition[0] <= MAP_WIDTH - SPRITE_SIZE &&
       newPosition[1] >= 0 &&
       newPosition[1] <= MAP_HEIGHT - SPRITE_SIZE
-      ? newPosition
-      : prevPosition;
+  }
+
+  function avoidObjects(prevPosition, newPosition) {
+    const tiles = store.getState().map.tiles;
+    const y = newPosition[1] / SPRITE_SIZE;
+    const x = newPosition[0] / SPRITE_SIZE;
+    const nextTile = tiles[y][x];
+    return nextTile < 5
   }
 
   // dispatches new position payload
   function moveDirection(direction) {
-    const prevPosition = store.getState().player.position;
     store.dispatch({
       type: 'MOVE_PLAYER',
       payload: {
-        position: mapBoundaries(prevPosition, getNewPosition(direction)),
+        position: direction,
       },
     });
+  }
+
+  function tryDirection(direction) {
+    const prevPosition = store.getState().player.position;
+    const newPosition = getNewPosition(direction);
+    if (mapBoundaries(prevPosition, newPosition) && avoidObjects(prevPosition, newPosition)) {
+      moveDirection(newPosition)
+    }
+
   }
 
   // returns direction corresponding to key pressed by user
   function handleKeyDown(e) {
     switch (e.keyCode) {
       case 37:
-        return moveDirection('LEFT');
+        return tryDirection('LEFT');
 
       case 38:
-        return moveDirection('UP');
+        return tryDirection('UP');
 
       case 39:
-        return moveDirection('RIGHT');
+        return tryDirection('RIGHT');
 
       case 40:
-        return moveDirection('DOWN');
+        return tryDirection('DOWN');
     }
   }
 
