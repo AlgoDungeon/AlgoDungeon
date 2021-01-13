@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import { NavLink, useHistory } from 'react-router-dom';
-import '../styles/LoginPage.scss';
-import Logo from '../images/AlgoDungeonLogo.png';
+import React, { Component } from "react";
+import { NavLink, useHistory } from "react-router-dom";
+import "../styles/LoginPage.scss";
+import Logo from "../images/AlgoDungeonLogo.png";
 
 class LoginPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      password: '',
+      username: "",
+      password: "",
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -36,10 +36,10 @@ class LoginPage extends Component {
     // props.submitEmail(loginForm.email);
     // props.submitPassword(loginForm.password);
 
-    axios.post('/api/user/login', loginForm).then((res) => {
+    axios.post("/api/user/login", loginForm).then((res) => {
       console.log(res.data);
       if (res.data === true) {
-        history.push('/home');
+        history.push("/home");
       } else {
         //alert please enter a valid email and username
       }
