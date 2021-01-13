@@ -4,7 +4,7 @@ const userController = require('../controllers/userController.js');
 const algoController = require('../controllers/algoController');
 const sessionController = require('../controllers/sessionController');
 const cookieController = require('../controllers/cookieController');
-
+const savefileController = require('../controllers/savefileController');
 // api/user/signup
 router.post(
   '/signup',
@@ -31,6 +31,7 @@ router.post(
 // api/user/logout
 router.get(
   '/logout',
+  savefileController.saveFile,
   sessionController.endSession,
   cookieController.deleteSSIDCookie,
   (req, res) => {
