@@ -6,15 +6,26 @@ const sessionController = require('../controllers/sessionController');
 const cookieController = require('../controllers/cookieController');
 
 // api/user/signup
-router.post('/signup', userController.signup, (req, res) => {
-  return res.status(200);
-});
+router.post(
+  '/signup',
+  userController.signup,
+  cookieController.setSSIDCookie,
+  sessionController.startSession,
+  (req, res) => {
+    return res.status(200).json(true);
+  }
+);
 
 // api/user/login
-router.post('/login', userController.login, (req, res) => {
-  res.data = true; // hardcoded for testing
-  return res.status(200).json(res.data);
-});
+router.post(
+  '/login',
+  userController.login,
+  cookieController.setSSIDCookie,
+  sessionController.startSession,
+  (req, res) => {
+    return res.status(200).json(true);
+  }
+);
 
 // api/user/
 router.get('/', (req, res) => {});
