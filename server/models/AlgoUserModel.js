@@ -1,12 +1,12 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const SALT_WORK_FACTOR = 5;
 const bcrypt = require('bcrypt');
 
 const userSchema = new Schema({
-  email: { type: String, required: true },
-  username: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
+  username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   level: { type: Number, default: 1 },
 });
@@ -26,4 +26,4 @@ userSchema.pre('save', function (next) {
   });
 });
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model('User', userSchema);
