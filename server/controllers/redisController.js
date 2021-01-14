@@ -1,5 +1,8 @@
 const redis = require('redis');
 
+// redis endpoint: redis-10330.c114.us-east-1-4.ec2.cloud.redislabs.com:10330
+// username: AlgoDungeonAdmin | password: AlgoDungeon22!
+
 // initializes a connection to redis for server-side caching
 const redisClient = redis.createClient({
   host: 'redis-10330.c114.us-east-1-4.ec2.cloud.redislabs.com',

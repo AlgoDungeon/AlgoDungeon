@@ -3,9 +3,17 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: './client/index.js',
+  mode: process.env.NODE_ENV,
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'index_bundle.js',
+    path: path.resolve(__dirname, 'build'),
+    filename: 'bundle.js',
+  },
+  devServer: {
+    historyApiFallback: true,
+    proxy: {
+      '/': 'http://localhost:3000',
+    },
+    publicPath: '/build',
   },
   devtool: 'source-map',
   module: {
@@ -32,7 +40,6 @@ module.exports = {
       },
     ],
   },
-  mode: 'development',
   plugins: [
     new HtmlWebpackPlugin({
       template: 'client/index.html',
