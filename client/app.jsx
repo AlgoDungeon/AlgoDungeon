@@ -11,8 +11,12 @@ import PlayerStats from './components/PlayerStats.jsx';
 class App extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      enemyChallenged: true,
+    };
   }
   render() {
+    const enemyChallenged = this.state.enemyChallenged;
     return (
       <div>
         <Switch>
@@ -24,8 +28,7 @@ class App extends Component {
           </Route>
           <Route path="/game">
             <PlayerStats />
-            <World />
-            <AlgoQuestionInput />
+            {enemyChallenged ? <AlgoQuestionInput /> : <World />}
           </Route>
           <Route exact path="/home"></Route>
         </Switch>

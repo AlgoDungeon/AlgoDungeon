@@ -1,13 +1,25 @@
 #dynamicproblem {
   margin: auto;
   width: 50%;
-  display: block;
+  // display: block;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 #question {
-  margin-top: -200px;
-  color: red;
+  // margin-top: -200px;
+  color: black;
   font-weight: bold;
+  border: 2px solid black;
+  margin: 40px auto;
+  border-radius: 25px;
+  background-color: #aaaaa9;
 }
+
+#question p {
+  margin: 5px;
+}
+
 #solution {
   width: 640px;
   margin-left: -100px;
@@ -20,5 +32,5 @@
   border-radius: 4px;
   font-size: 22px;
   padding: 5px 5px 5px 5px;
-  font-family: "Oldenburg", cursive;
+  font-family: 'Oldenburg', cursive;
 }
