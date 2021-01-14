@@ -47,27 +47,27 @@ function Map(props) {
   let playerPos = props.position;
   console.log(playerPos)
 
-  let fixedX = (playerPos[0]/32) - 3;
-  let fixedY = (playerPos[1]/32) - 3;
+  let fixedX = (playerPos[0]/32);
+  let fixedY = (playerPos[1]/32);
   console.log(fixedX)
 
 
   let fixedMap = [];
   let correction = Math.floor(ROWS/2);
   let correctionX = Math.floor(COLUMNS/2);
+  console.log('HERE', fixedX, '  ', fixedY);
 
   for (let i = fixedY - correction; i <= fixedY + correction; i++) {
     let inner = [];
     if (i < 0) fixedY += 1;
-    else if (i > largeMap.length - 1) break;
+    else if (i > largeMap.length - 1) continue;
     else {
       for (let j = fixedX - correctionX; j <= fixedX + correctionX; j++) {
         if (j < 0) fixedX += 1;
-        else if (j > largeMap[0].length - 1) break;
+        else if (!(j > largeMap[0].length - 1)) inner.push(largeMap[i][j]);  
         else {
-          inner.push(largeMap[i][j]);
+          continue;
         }
-
         }
         fixedMap.push(inner);
     }

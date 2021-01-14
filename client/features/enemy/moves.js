@@ -74,10 +74,10 @@ export default function handleMovement(enemy) {
     }
   }
 
-  // listens for keydown event
-  // window.addEventListener('keydown', (e) => {
-  //   //e.preventDefault();
-  //   //handleKeyDown(e);
-  // });
+  //listens for keydown event
+  window.addEventListener('keydown', (e) => {
+    // e.preventDefault();
+    handleKeyDown(e);
+  });
   return enemy;
 }

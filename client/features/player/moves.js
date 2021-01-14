@@ -1,6 +1,7 @@
 /* eslint-disable default-case */
 import store from '../../config/store.js';
-import { SPRITE_SIZE, MAP_WIDTH, MAP_HEIGHT } from '../../config/constants.js';
+import { SPRITE_SIZE, MAP_WIDTH, MAP_HEIGHT , ROWS, COLUMNS} from '../../config/constants.js';
+import { tiles } from '../../maps/map-1.js';
 
 export default function handleMovement(player) {
   // calculates new position of sprite based on direction of movement
@@ -47,11 +48,11 @@ export default function handleMovement(player) {
   // tracks sprite movement to prevent from walking off map
   //if !== 0 then obstacle
   function mapBoundaries(prevPosition, newPosition) {
-    return (
-      newPosition[0] >= 0 &&
-      newPosition[0] <= MAP_WIDTH - SPRITE_SIZE &&
-      newPosition[1] >= 0 &&
-      newPosition[1] <= MAP_HEIGHT - SPRITE_SIZE
+    return ( true
+      // newPosition[0] >= 0 &&
+      // newPosition[0] <= MAP_WIDTH - SPRITE_SIZE &&
+      // newPosition[1] >= 0 &&
+      // newPosition[1] <= MAP_HEIGHT - SPRITE_SIZE
     );
   }
 
@@ -81,8 +82,9 @@ export default function handleMovement(player) {
 
   // combines functionality to keep sprite inside map and prevent from walking through solid objects
   function tryDirection(direction) {
-    const prevPosition = store.getState().player.position;
-    const newPosition = getNewPosition(direction);
+    let prevPosition = store.getState().player.position;
+    let newPosition = getNewPosition(direction);
+    console.log(newPosition)
     if (
       mapBoundaries(prevPosition, newPosition) &&
       avoidObjects(prevPosition, newPosition)
@@ -110,7 +112,7 @@ export default function handleMovement(player) {
 
   // listens for keydown event
   window.addEventListener('keydown', (e) => {
-    e.preventDefault();
+    //e.preventDefault();
     handleKeyDown(e);
   });
   return player;

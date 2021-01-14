@@ -1,5 +1,5 @@
 import React from 'react';
-import sprite from '../../CharacterSprites/$monja.png';
+import sprite from '../../CharacterSprites/trainer1.png';
 import { SPRITE_SIZE } from '../config/constants.js';
 import { connect } from 'react-redux';
 import handleMovement from '../features/player/moves.js';

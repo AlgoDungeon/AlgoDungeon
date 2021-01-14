@@ -28,7 +28,7 @@ class App extends Component {
           </Route>
           <Route path="/game">
             <PlayerStats />
-            {enemyChallenged ? <AlgoQuestionInput /> : <World />}
+            {!enemyChallenged ? <AlgoQuestionInput /> : <World />}
           </Route>
           <Route exact path="/home"></Route>
         </Switch>
