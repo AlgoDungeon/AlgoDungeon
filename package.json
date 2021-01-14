@@ -4,9 +4,10 @@
   "description": "Game for Algo Practice",
   "main": ".index.js",
   "scripts": {
-    "start": "nodemon server/server.js & webpack-dev-server --open",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "create": "webpack"
+    "start": "nodemon server/server.js",
+    "build": "cross-env NODE_ENV=production webpack",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --open &  nodemon server/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -28,6 +29,7 @@
     "codemirror": "^5.59.1",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
     "express": "^4.17.1",
     "framer-motion": "^3.2.1",
     "mongoose": "^5.11.11",

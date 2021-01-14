@@ -1,27 +1,29 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController.js');
-const algoController = require('../controllers/algoController');
+const redisController = require('../controllers/redisController');
 const sessionController = require('../controllers/sessionController');
 const cookieController = require('../controllers/cookieController');
 const savefileController = require('../controllers/savefileController');
-// api/user/signup
+// /user/signup
 router.post(
   '/signup',
   userController.signup,
   cookieController.setSSIDCookie,
+  redisController.checkActiveSession,
   sessionController.startSession,
   (req, res) => {
     return res.status(200).json(true);
   }
 );
 
-// api/user/login
+// /user/login
 router.post(
   '/login',
   userController.login,
   cookieController.checkCookies,
   cookieController.setSSIDCookie,
+  redisController.checkActiveSession,
   sessionController.startSession,
   (req, res) => {
     return res.status(200).json(true);

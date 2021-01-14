@@ -28,6 +28,7 @@ cookieController.setSSIDCookie = async (req, res, next) => {
     next(error);
   }
 
+  console.log(`ssid in set cookie - ${res.locals.ssid}`);
   res.cookie('algodungeonssid', res.locals.ssid, {
     httpOnly: true,
   });
