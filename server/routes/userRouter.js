@@ -30,7 +30,7 @@ router.post(
   }
 );
 
-// api/user/logout
+// /user/logout
 router.get(
   '/logout',
   savefileController.saveFile,
