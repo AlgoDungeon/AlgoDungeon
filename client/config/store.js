@@ -3,7 +3,7 @@ import playerReducer from '../features/player/reducer.js';
 import mapsReducer from '../features/map/reducer.js';
 import enemyReducer from '../features/enemy/reducer.js';
 import statsReducer from '../playerStats/statsReducer.js';
-
+import throttle from 'lodash.throttle';
 // saves the state to local storage in browser
 function saveToLocalStorage(state) {
   try {
@@ -42,6 +42,6 @@ const store = createStore(
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
-store.subscribe(() => saveToLocalStorage(store.getState()));
+store.subscribe(throttle(() => saveToLocalStorage(store.getState()), 1000));
 
 export default store;

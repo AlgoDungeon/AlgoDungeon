@@ -11,20 +11,21 @@
   color: black;
   font-weight: bold;
   border: 2px solid black;
-  margin: 40px;
+  margin: 40px auto;
   border-radius: 25px;
-  background-color: #aaaaa9;
+  background-color: #e8e8e8;
 }
 
 #question p {
-  margin: 5px;
+  margin: 8px;
 }
 
 #solution {
   width: 640px;
-  margin-left: -100px;
+  // margin-left: -100px;
   height: 250px;
   display: block;
+  margin: 0 auto;
 }
 #submitsolution {
   color: #ffffff;
