@@ -15,9 +15,6 @@ class AlgoQuestionInput extends Component {
     };
     this.onChange = this.onChange.bind(this);
   }
-  componentDidMount() {
-    console.log(fizzBuzz);
-  }
 
   onChange(e) {
     this.setState({ [e.target.name]: [e.target.value] });
