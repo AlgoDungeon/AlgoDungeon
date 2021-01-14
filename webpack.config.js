@@ -1,41 +1,56 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  entry: './client/index.js',
+  mode: process.env.NODE_ENV,
+  devtool: "source-map",
+  entry: "./client/index.js",
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'index_bundle.js',
+    path: `${__dirname}/build`,
+    filename: "bundle.js",
   },
-  devtool: 'source-map',
+
+  devServer: {
+    historyApiFallback: true,
+    proxy: {
+      "/": "http://localhost:3000",
+    },
+    publicPath: "/build",
+  },
+  // entry: "./client/index.js",
+  // output: {
+  //   path: path.resolve(__dirname, "dist"),
+  //   filename: "index_bundle.js",
+  // },
+  // devtool: "source-map",
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
         exclude: /(node_modules)/,
         use: {
-          loader: 'babel-loader',
+          loader: "babel-loader",
           options: {
-            presets: ['@babel/preset-env', '@babel/preset-react'],
+            presets: ["@babel/preset-env", "@babel/preset-react"],
           },
         },
       },
       {
         test: /\.(css|scss)$/i,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
+        use: ["style-loader", "css-loader", "sass-loader"],
       },
       {
         test: /\.(jpg|jpeg|png)$/,
         use: {
-          loader: 'url-loader',
+          loader: "url-loader",
         },
       },
     ],
   },
-  mode: 'development',
+  // mode: "development",
   plugins: [
     new HtmlWebpackPlugin({
-      template: 'client/index.html',
+      template: "client/index.html",
     }),
   ],
 };
