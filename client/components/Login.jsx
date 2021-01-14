@@ -1,50 +1,48 @@
-import React, { Component } from 'react';
-import { NavLink, useHistory } from 'react-router-dom';
-import '../styles/LoginPage.scss';
-import Logo from '../images/AlgoDungeonLogo.png';
+import React, { Component } from "react";
+import { NavLink, Redirect } from "react-router-dom";
+import "../styles/LoginPage.scss";
+import Logo from "../images/AlgoDungeonLogo.png";
 class LoginPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      password: '',
+      isLoggedIn: false,
+      loginParams: {
+        Username: "",
+        Password: "",
+      },
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleFormChange = this.handleFormChange.bind(this);
+    this.login = this.login.bind(this);
   }
-  handleChange(event) {
+  handleFormChange(event) {
     //updates state based on form input values
-    this.setState({ [event.target.name]: event.target.value });
+    let loginParamsNew = { ...this.state.loginParams };
+    let val = event.target.value;
+    loginParamsNew[event.target.name] = val;
+
+    this.setState({ loginParams: loginParamsNew });
+    console.log(this.state.loginParams);
   }
-  handleSubmit(event) {
-    // let teacherName = this.name.value;
-    // let teacherTopic = this.topic.value;
-    // let path = `teachers/${teacherTopic}/${teacherName}`;
-    // // this is the part !!!
-    // this.props.history.push(path);
+  login(event) {
+    let username = this.state.loginParams.Username;
+    let userpassword = this.state.loginParams.Password;
+    //write conditional if username and password match the database
+
+    //run next set cookie/session
+    //add find one here
+
     event.preventDefault();
-    this.setState({
-      Username: email,
-      Password: password,
-    });
-    // let history = useHistory();
-    // props.submitEmail(loginForm.email);
-    // props.submitPassword(loginForm.password);
-    // axios.post("/api/user/login", loginForm).then((res) => {
-    //   console.log(res.data);
-    //   if (res.data === true) {
-    //     history.push("/home");
-    //   } else {
-    //     //alert please enter a valid email and username
-    //   }
-    // });
   }
+
   render() {
+    //if condition to check for cookie here
+    //when it is true return <Redirect to="/game"/>
     return (
       <div id="loginform">
         <div>&nbsp;</div>
         <div id="logininput">
-          <form onSubmit={this.handleSubmit} action="submit">
+          <form onSubmit={this.login} action="submit">
             <center>
               <img src={Logo} />
             </center>
@@ -54,7 +52,7 @@ class LoginPage extends Component {
               type="text"
               name="Username"
               value={this.state.Username}
-              onChange={this.handleChange}
+              onChange={this.handleFormChange}
               required
             />
             <br></br>
@@ -64,7 +62,7 @@ class LoginPage extends Component {
               type="text"
               name="Password"
               value={this.state.Password}
-              onChange={this.handleChange}
+              onChange={this.handleFormChange}
               required
             />
             <br></br> <br></br>
