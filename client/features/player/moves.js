@@ -67,13 +67,14 @@ export default function handleMovement(player) {
   // dispatches new position payload
   function moveDirection(newPosition, direction) {
     const imageIndex = getImageIndex();
+    let updatedSpriteLocation = getSpriteLocation(direction, imageIndex);
     store.dispatch({
       type: 'MOVE_PLAYER',
       payload: {
         position: newPosition,
         direction,
         imageIndex,
-        spriteLocation: getSpriteLocation(direction, imageIndex),
+        spriteLocation: updatedSpriteLocation,
       },
     });
   }
@@ -109,7 +110,7 @@ export default function handleMovement(player) {
 
   // listens for keydown event
   window.addEventListener('keydown', (e) => {
-    //e.preventDefault();
+    e.preventDefault();
     handleKeyDown(e);
   });
   return player;

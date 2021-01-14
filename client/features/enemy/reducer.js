@@ -1,7 +1,7 @@
 import { SPRITE_SIZE } from '../../config/constants.js';
 
 const initialState = {
-  position: [SPRITE_SIZE * 8, SPRITE_SIZE * 8],
+  position: [SPRITE_SIZE * 2, SPRITE_SIZE * 2],
 };
 
 const enemyReducer = (state = initialState, action) => {

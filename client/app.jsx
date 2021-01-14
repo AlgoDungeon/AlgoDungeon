@@ -13,7 +13,7 @@ class App extends Component {
   }
   render() {
     return (
-      <div>
+      <div >
         <Switch>
           <Route exact path="/">
             <LoginPage />
@@ -23,7 +23,7 @@ class App extends Component {
           </Route>
           <Route path="/game">
             <World />
-            <AlgoQuestionInput />
+            {/* <AlgoQuestionInput /> */}
           </Route>
           <Route exact path="/home"></Route>
         </Switch>
