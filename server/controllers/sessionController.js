@@ -1,36 +1,27 @@
 const Session = require('../models/sessionModel');
+const redis = require('redis');
+
+// initializes a connection to redis for server-side caching
+const redisClient = redis.createClient({
+  host: 'redis-10330.c114.us-east-1-4.ec2.cloud.redislabs.com',
+  port: 10330,
+  password: '5wxv6Fd3aXrNtA4lLg8rtV4E5QsHxuK5', // default user password
+});
 
 const sessionController = {};
 
-/**
- * isLoggedIn - find the appropriate session for this request in the database, then
- * verify whether or not the session is still valid.
- */
-sessionController.isLoggedIn = (req, res, next) => {
-  // write code here
-  const ssid = res.locals.ssid || req.cookies.algodungeonssid;
-  // console.log('looking for session with id', id);
-  Session.findOne({ cookieSSID: ssid }, (err, activeSession) => {
-    if (err) {
-      err.message = { Error: 'Error within sessionController.isLoggedIn' };
-      next(err);
-    }
-    // console.log('activeSession is ', activeSession);
-
-    if (activeSession !== null) return next();
-
-    return res.json(false);
-  });
-};
-
-/**
- * startSession - create and save a new Session into the database.
- */
 sessionController.startSession = async (req, res, next) => {
-  //write code here
+  // checks to see if redis cache found an active user
+  // saves time by not querying the database
+  console.log(
+    `inside session controller active user is ${res.locals.activeUser}`
+  );
+  if (res.locals.activeUser) return next();
+  console.log(`ssid in start session = ${res.locals.ssid}`);
   const ssid = String(res.locals.ssid);
 
   // used to detect previous active session
+  // provides fault tolerance and data persistence in case redis cache crashes or loses data
   await Session.findOne({ cookieId: ssid }, async (err, activeSession) => {
     if (err) {
       err.message = { Error: 'Error in sessionController.startSession' };
@@ -38,9 +29,16 @@ sessionController.startSession = async (req, res, next) => {
     }
 
     if (activeSession) {
+      // stores active session to redis cache for 2 hours
+      // key of ssid will match browser cookie, later be used associate a session with a user
+      redisClient.setex(ssid, 7200, req.body.username);
       next();
     } else {
       try {
+        // stores active session to redis cache for 2 hours
+        // key of ssid will match browser cookie, later be used associate a session with a user
+        redisClient.setex(ssid, 7200, req.body.username);
+        // creates session in database for 2 hours
         await Session.create({ cookieId: ssid });
         return next();
       } catch (err) {

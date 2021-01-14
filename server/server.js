@@ -33,7 +33,7 @@ mongoose.connection.once('open', () => {
 // redis endpoint: redis-10330.c114.us-east-1-4.ec2.cloud.redislabs.com:10330
 // username: AlgoDungeonAdmin | password: AlgoDungeon22!
 
-const client = redis.createClient({
+const redisClient = redis.createClient({
   host: 'redis-10330.c114.us-east-1-4.ec2.cloud.redislabs.com',
   port: 10330,
   password: '5wxv6Fd3aXrNtA4lLg8rtV4E5QsHxuK5', // default user password
@@ -44,11 +44,11 @@ app.use('/user', userRouter);
 app.use('/savefiles', savefileRouter);
 app.use('/algo', algoRouter);
 
-client.set('foo', 'bar', (err, reply) => {
+redisClient.set('foo', 'bar', (err, reply) => {
   if (err) throw err;
   // console.log(reply);
 
-  client.get('foo', (err, reply) => {
+  redisClient.get('foo', (err, reply) => {
     if (err) throw err;
     // console.log(reply);
   });
