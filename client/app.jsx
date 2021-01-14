@@ -7,16 +7,15 @@ import SignupPage from './components/SignUp.jsx';
 import World from './features/world/index.js';
 import AlgoQuestionInput from './components/AlgoQuestionInput.jsx';
 import PlayerStats from './components/PlayerStats.jsx';
+import store from './config/store.js';
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      enemyChallenged: true,
-    };
   }
+
   render() {
-    const enemyChallenged = this.state.enemyChallenged;
+    const enemyChallenged = store.getState().player.enemyChallenged;
     return (
       <div >
         <Switch>
