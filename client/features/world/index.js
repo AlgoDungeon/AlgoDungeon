@@ -9,9 +9,12 @@ import { tiles } from '../../maps/map-1.js';
 import store from '../../config/store';
 
 function World(props) {
-  store.dispatch( { type: 'ADD_TILES', payload: {
-    tiles,
-  }})
+  store.dispatch({
+    type: 'ADD_TILES',
+    payload: {
+      tiles,
+    },
+  });
 
   return (
     <div
@@ -23,8 +26,8 @@ function World(props) {
       }}
     >
       <Map tiles={tiles} />
-      <Player/>
-      <Enemy/>
+      <Player />
+      <Enemy />
     </div>
   );
 }

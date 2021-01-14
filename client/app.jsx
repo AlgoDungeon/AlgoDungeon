@@ -1,11 +1,12 @@
 /* eslint-disable no-useless-constructor */
 /* eslint-disable react/prefer-stateless-function */
-import React, { Component } from "react";
-import { Route, Switch } from "react-router-dom";
-import LoginPage from "./components/Login.jsx";
-import SignupPage from "./components/SignUp.jsx";
-import World from "./features/world/index.js";
-import AlgoQuestionInput from "./components/AlgoQuestionInput.jsx";
+import React, { Component } from 'react';
+import { Route, Switch } from 'react-router-dom';
+import LoginPage from './components/Login.jsx';
+import SignupPage from './components/SignUp.jsx';
+import World from './features/world/index.js';
+import AlgoQuestionInput from './components/AlgoQuestionInput.jsx';
+import PlayerStats from './components/PlayerStats.jsx';
 
 class App extends Component {
   constructor(props) {
@@ -22,6 +23,7 @@ class App extends Component {
             <SignupPage />
           </Route>
           <Route path="/game">
+            <PlayerStats />
             <World />
             <AlgoQuestionInput />
           </Route>
