@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 import Player from '../../components/Player.jsx';
-import Enemy from '../../components/Enemy.jsx';
+// import Enemy from '../../components/Enemy.jsx';
 import Map from '../map/index.js';
 import { SPRITE_SIZE } from '../../config/constants.js';
 
@@ -27,7 +27,7 @@ function World(props) {
     >
       <Map tiles={tiles} />
       <Player />
-      <Enemy />
+      {/* <Enemy /> */}
     </div>
   );
 }
