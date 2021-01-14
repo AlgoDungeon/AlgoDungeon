@@ -5,14 +5,14 @@ const algoController = require('../controllers/algoController');
 const sessionController = require('../controllers/sessionController');
 const cookieController = require('../controllers/cookieController');
 
-// /api/savefiles
+// /savefiles
 router.get('/', (req, res) => {
-  res.status(200).json('loaded a game');
+  res.status(200).json(res.locals.files);
 });
 
-// /api/savefiles
+// /savefiles
 router.post('/', (req, res) => {
-  res.status(200).json('posted a dave file!');
+  res.status(200).json(true);
 });
 
 module.exports = router;

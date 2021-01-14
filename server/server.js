@@ -9,11 +9,12 @@ const mongoose = require('mongoose');
 const userRouter = require('./routes/userRouter');
 const savefileRouter = require('./routes/savefileRouter');
 const algoRouter = require('./routes/algoRouter');
+const cookieParser = require('cookie-parser');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 app.use(bodyParser.json());
-
+app.use(cookieParser());
 // const server = http.createServer(app);
 // const uuid = require('node-uuid'); //used for creating games.
 const redis = require('redis');
@@ -32,7 +33,7 @@ mongoose.connection.once('open', () => {
 // redis endpoint: redis-10330.c114.us-east-1-4.ec2.cloud.redislabs.com:10330
 // username: AlgoDungeonAdmin | password: AlgoDungeon22!
 
-const client = redis.createClient({
+const redisClient = redis.createClient({
   host: 'redis-10330.c114.us-east-1-4.ec2.cloud.redislabs.com',
   port: 10330,
   password: '5wxv6Fd3aXrNtA4lLg8rtV4E5QsHxuK5', // default user password
@@ -43,13 +44,13 @@ app.use('/user', userRouter);
 app.use('/savefiles', savefileRouter);
 app.use('/algo', algoRouter);
 
-client.set('foo', 'bar', (err, reply) => {
+redisClient.set('foo', 'bar', (err, reply) => {
   if (err) throw err;
-  console.log(reply);
+  // console.log(reply);
 
-  client.get('foo', (err, reply) => {
+  redisClient.get('foo', (err, reply) => {
     if (err) throw err;
-    console.log(reply);
+    // console.log(reply);
   });
 });
 
