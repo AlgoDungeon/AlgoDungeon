@@ -27,13 +27,8 @@ class App extends Component {
             <SignupPage />
           </Route>
           <Route path="/game">
-<<<<<<< HEAD
-            <World />
-            {/* <AlgoQuestionInput /> */}
-=======
             <PlayerStats />
             {enemyChallenged ? <AlgoQuestionInput /> : <World />}
->>>>>>> 601c3d3b289d2a9240b7c8a8c6ac665495d2259f
           </Route>
           <Route exact path="/home"></Route>
         </Switch>
