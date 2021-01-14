@@ -13,7 +13,7 @@ class SignupPage extends Component {
       },
     };
     this.handleFormChange = this.handleFormChange.bind(this);
-    this.signnp = this.signnp.bind(this);
+    this.signup = this.signup.bind(this);
   }
 
   handleFormChange(event) {
@@ -25,23 +25,47 @@ class SignupPage extends Component {
     this.setState({ signupParams: signupParamsNew });
     console.log(this.state.signupParams);
   }
-  signnp(event) {
-    let username = this.state.signupParams.Username;
+  signup(event) {
+    let usernamefromstate = this.state.signupParams.Username;
     let userpassword = this.state.signupParams.Password;
+    let useremail = this.state.signupParams.Email;
     //write conditional if username and password match the database
-
-    //run next set cookie/session
-    //add find one here
-
-    event.preventDefault();
+    fetch("/user/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: usernamefromstate,
+        password: userpassword,
+        email: useremail,
+      }),
+    })
+      //then check for res data
+      .then(function (response) {
+        if (res.data === true) {
+          alert("You are now signed up!");
+          // history.push("/");
+        }
+      })
+      //catch all errors
+      .catch((err) => {
+        console.log(err);
+      });
   }
+
+  //run next set cookie/session
+  //add find one here
+
+  // event.preventDefault();
+  // }
 
   render() {
     return (
       <div id="signupform">
         <div>&nbsp;</div>
         <div id="signupinput">
-          <form onSubmit={this.signnp} action="submit">
+          <form onSubmit={this.signup} action="/user/signup" method="POST">
             <center>
               <img src={Logo} />
             </center>
@@ -77,7 +101,7 @@ class SignupPage extends Component {
             />
             <br></br> <br></br>
             <center>
-              <button id="loginbutton" name="submit" type="submit">
+              <button id="loginbutton" type="submit">
                 Sign Up
               </button>
             </center>
