@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 import Player from '../../components/Player.jsx';
-import Enemy from '../../components/Enemy.jsx';
+// import Enemy from '../../components/Enemy.jsx';
 import Map from '../map/index.js';
 import { SPRITE_SIZE } from '../../config/constants.js';
 
@@ -9,9 +9,12 @@ import { tiles } from '../../maps/map-1.js';
 import store from '../../config/store';
 
 function World(props) {
-  store.dispatch( { type: 'ADD_TILES', payload: {
-    tiles,
-  }})
+  store.dispatch({
+    type: 'ADD_TILES',
+    payload: {
+      tiles,
+    },
+  });
 
   return (
     <div
@@ -23,8 +26,8 @@ function World(props) {
       }}
     >
       <Map tiles={tiles} />
-      <Player/>
-      <Enemy/>
+      <Player />
+      {/* <Enemy /> */}
     </div>
   );
 }

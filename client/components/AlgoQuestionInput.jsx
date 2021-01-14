@@ -5,6 +5,7 @@ import 'codemirror/theme/material.css';
 import 'codemirror/mode/javascript/javascript';
 import 'codemirror/mode/css/css';
 import { UnControlled as CodeMirror } from 'react-codemirror2';
+import fizzBuzz from '../features/algos/algos.js';
 
 class AlgoQuestionInput extends Component {
   constructor(props) {
@@ -13,6 +14,9 @@ class AlgoQuestionInput extends Component {
       value: '',
     };
     this.onChange = this.onChange.bind(this);
+  }
+  componentDidMount() {
+    console.log(fizzBuzz);
   }
 
   onChange(e) {
@@ -26,7 +30,9 @@ class AlgoQuestionInput extends Component {
   render() {
     return (
       <div id="dynamicproblem">
-        <div id="question">This is where the problem will go...</div>
+        <div id="question">
+          <p>{fizzBuzz.prompt}</p>
+        </div>
         <div id="solution">
           <CodeMirror
             id="code-mirror-wrapper"
