@@ -44,35 +44,29 @@ function Map(props) {
   let largeMap = props.tiles;
   //selecting out small portion of map based on current player location
 
-  let playerPos = props.position;
+  let playerPos = JSON.parse(JSON.stringify(props.position));
+  playerPos[0] = playerPos[0]/32 - 1;
+  playerPos[1] = playerPos[1]/32 - 1;
   console.log(playerPos)
+  let adjustX = Math.floor(COLUMNS / 2);
+  let adjustY = Math.floor(ROWS / 2);
 
-  let fixedX = (playerPos[0]/32);
-  let fixedY = (playerPos[1]/32);
-  console.log(fixedX)
 
 
   let fixedMap = [];
-  let correction = Math.floor(ROWS/2);
-  let correctionX = Math.floor(COLUMNS/2);
-  console.log('HERE', fixedX, '  ', fixedY);
 
-  for (let i = fixedY - correction; i <= fixedY + correction; i++) {
+  for (let i = playerPos[1] - adjustY; i < playerPos[1] + adjustY ; i++) {
     let inner = [];
-    if (i < 0) fixedY += 1;
-    else if (i > largeMap.length - 1) continue;
-    else {
-      for (let j = fixedX - correctionX; j <= fixedX + correctionX; j++) {
-        if (j < 0) fixedX += 1;
-        else if (!(j > largeMap[0].length - 1)) inner.push(largeMap[i][j]);  
-        else {
-          continue;
-        }
-        }
-        fixedMap.push(inner);
+    for (let j = playerPos[0] - adjustX; j < playerPos[0] + adjustX; j++) {
+      if (j > largeMap.length - 1 || j < 0 || i > largeMap[0].length - 1 || i < 0) {
+        inner.push(99);   
+      }
+      else {
+        inner.push(largeMap[i][j]);
+      }
     }
-
-    }
+    fixedMap.push(inner);
+  }
 
   return (
     <div

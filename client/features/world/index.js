@@ -28,7 +28,7 @@ function World(props) {
     >
       <Map tiles={tiles} />
       <Player />
-      <Enemy />
+      {/* <Enemy /> */}
     </div>
   );
 }

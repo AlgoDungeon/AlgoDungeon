@@ -18,7 +18,7 @@ export default function handleMovement(player) {
         return [prevPosition[0], prevPosition[1] - SPRITE_SIZE];
 
       case 'DOWN':
-        return [prevPosition[0], prevPosition[1] + SPRITE_SIZE];
+          return [prevPosition[0], prevPosition[1] + SPRITE_SIZE];
     }
   }
 
@@ -48,10 +48,10 @@ export default function handleMovement(player) {
   // tracks sprite movement to prevent from walking off map
   //if !== 0 then obstacle
   function mapBoundaries(prevPosition, newPosition) {
-    return ( true
-      // newPosition[0] >= 0 &&
+    return (
+       newPosition[0] >= 0 &&
       // newPosition[0] <= MAP_WIDTH - SPRITE_SIZE &&
-      // newPosition[1] >= 0 &&
+      newPosition[1] >= 0 //&&
       // newPosition[1] <= MAP_HEIGHT - SPRITE_SIZE
     );
   }
@@ -59,8 +59,10 @@ export default function handleMovement(player) {
   // prevents sprite from walking through solid objects on map
   function avoidObjects(prevPosition, newPosition) {
     const tiles = store.getState().map.tiles;
+
     const y = newPosition[1] / SPRITE_SIZE;
     const x = newPosition[0] / SPRITE_SIZE;
+
     const nextTile = tiles[y][x];
     return nextTile < 5;
   }
@@ -84,11 +86,11 @@ export default function handleMovement(player) {
   function tryDirection(direction) {
     let prevPosition = store.getState().player.position;
     let newPosition = getNewPosition(direction);
-    console.log(newPosition)
     if (
       mapBoundaries(prevPosition, newPosition) &&
       avoidObjects(prevPosition, newPosition)
     ) {
+
       moveDirection(newPosition, direction);
     }
   }
