@@ -1,5 +1,5 @@
 import React from 'react';
-import sprite from '../../CharacterSprites/$monja_dark.png';
+import sprite from '../../CharacterSprites/trainer1.png';
 import { SPRITE_SIZE } from '../config/constants.js';
 import { connect } from 'react-redux';
 import handleMovement from '../features/enemy/moves.js';
@@ -20,8 +20,4 @@ function Enemy(props) {
   );
 }
 
-function mapStateToProps(state) {
-  return { ...state.enemy };
-}
-
-export default connect(mapStateToProps)(handleMovement(Enemy));
+export default Enemy;

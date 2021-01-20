@@ -1,6 +1,7 @@
 /* eslint-disable default-case */
 import store from '../../config/store.js';
-import { SPRITE_SIZE, MAP_WIDTH, MAP_HEIGHT } from '../../config/constants.js';
+import { SPRITE_SIZE, MAP_WIDTH, MAP_HEIGHT , ROWS, COLUMNS} from '../../config/constants.js';
+import { tiles } from '../../maps/map-1.js';
 
 export default function handleMovement(player) {
   // calculates new position of sprite based on direction of movement
@@ -17,7 +18,7 @@ export default function handleMovement(player) {
         return [prevPosition[0], prevPosition[1] - SPRITE_SIZE];
 
       case 'DOWN':
-        return [prevPosition[0], prevPosition[1] + SPRITE_SIZE];
+          return [prevPosition[0], prevPosition[1] + SPRITE_SIZE];
     }
   }
 
@@ -48,45 +49,69 @@ export default function handleMovement(player) {
   //if !== 0 then obstacle
   function mapBoundaries(prevPosition, newPosition) {
     return (
-      newPosition[0] >= 0 &&
-      newPosition[0] <= MAP_WIDTH - SPRITE_SIZE &&
-      newPosition[1] >= 0 &&
-      newPosition[1] <= MAP_HEIGHT - SPRITE_SIZE
+       newPosition[0] >= 0 &&
+      // newPosition[0] <= MAP_WIDTH - SPRITE_SIZE &&
+      newPosition[1] >= 0 //&&
+      // newPosition[1] <= MAP_HEIGHT - SPRITE_SIZE
     );
   }
 
   // prevents sprite from walking through solid objects on map
   function avoidObjects(prevPosition, newPosition) {
     const tiles = store.getState().map.tiles;
+
     const y = newPosition[1] / SPRITE_SIZE;
     const x = newPosition[0] / SPRITE_SIZE;
+
     const nextTile = tiles[y][x];
     return nextTile < 5;
   }
 
+    // dispatches new position payload
+    function checkEnemy(newPosition) {
+      if (newPosition[0]/32 === 9 && newPosition[1]/32 === 6) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    }
+
   // dispatches new position payload
   function moveDirection(newPosition, direction) {
     const imageIndex = getImageIndex();
+    let updatedSpriteLocation = getSpriteLocation(direction, imageIndex);
     store.dispatch({
       type: 'MOVE_PLAYER',
       payload: {
         position: newPosition,
         direction,
         imageIndex,
-        spriteLocation: getSpriteLocation(direction, imageIndex),
+        spriteLocation: updatedSpriteLocation,
+        enemyChallenged: false,
       },
     });
   }
 
   // combines functionality to keep sprite inside map and prevent from walking through solid objects
   function tryDirection(direction) {
-    const prevPosition = store.getState().player.position;
-    const newPosition = getNewPosition(direction);
+    let prevPosition = store.getState().player.position;
+    let newPosition = getNewPosition(direction);
     if (
       mapBoundaries(prevPosition, newPosition) &&
       avoidObjects(prevPosition, newPosition)
     ) {
-      moveDirection(newPosition, direction);
+      if (!checkEnemy(newPosition)) {
+        moveDirection(newPosition, direction);
+      }
+      else {
+        store.dispatch({
+          type: 'PLAYER_CHALLENGED',
+          payload: {
+            enemyChallenged: true,
+          },
+        });
+      }
     }
   }
 
