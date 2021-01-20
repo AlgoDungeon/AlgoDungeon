@@ -15,9 +15,10 @@ const playerReducer = (state = initialState, action) => {
       return {
         ...action.payload,
       };
-
     case 'PLAYER_CHALLENGED':
+      console.log('here!')
       return {
+        ...state,
         ...action.payload,
       };
     default:

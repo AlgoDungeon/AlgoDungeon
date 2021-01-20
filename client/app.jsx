@@ -14,8 +14,11 @@ class App extends Component {
     super(props);
   }
 
+
+
   render() {
     const enemyChallenged = store.getState().player.enemyChallenged;
+    console.log('app:', enemyChallenged)
     return (
       <div >
         <Switch>

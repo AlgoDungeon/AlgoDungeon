@@ -67,6 +67,16 @@ export default function handleMovement(player) {
     return nextTile < 5;
   }
 
+    // dispatches new position payload
+    function checkEnemy(newPosition) {
+      if (newPosition[0]/32 === 9 && newPosition[1]/32 === 6) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    }
+
   // dispatches new position payload
   function moveDirection(newPosition, direction) {
     const imageIndex = getImageIndex();
@@ -78,6 +88,7 @@ export default function handleMovement(player) {
         direction,
         imageIndex,
         spriteLocation: updatedSpriteLocation,
+        enemyChallenged: false,
       },
     });
   }
@@ -90,8 +101,17 @@ export default function handleMovement(player) {
       mapBoundaries(prevPosition, newPosition) &&
       avoidObjects(prevPosition, newPosition)
     ) {
-
-      moveDirection(newPosition, direction);
+      if (!checkEnemy(newPosition)) {
+        moveDirection(newPosition, direction);
+      }
+      else {
+        store.dispatch({
+          type: 'PLAYER_CHALLENGED',
+          payload: {
+            enemyChallenged: true,
+          },
+        });
+      }
     }
   }
 
