@@ -8,6 +8,7 @@ import World from './features/world/index.js';
 import AlgoQuestionInput from './components/AlgoQuestionInput.jsx';
 import PlayerStats from './components/PlayerStats.jsx';
 import store from './config/store.js';
+import { connect } from 'react-redux';
 
 class App extends Component {
   constructor(props) {
@@ -15,10 +16,7 @@ class App extends Component {
   }
 
 
-
   render() {
-    const enemyChallenged = store.getState().player.enemyChallenged;
-    console.log('app:', enemyChallenged)
     return (
       <div >
         <Switch>
@@ -30,7 +28,7 @@ class App extends Component {
           </Route>
           <Route path="/game">
             <PlayerStats />
-            {enemyChallenged ? <AlgoQuestionInput /> : <World />}
+            {this.props.enemyChallenged ? <AlgoQuestionInput /> : <World />}
           </Route>
           <Route exact path="/home"></Route>
         </Switch>
@@ -39,4 +37,13 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    ...state.player
+  };
+};
+
+
+export default connect(
+  mapStateToProps
+)(App);
